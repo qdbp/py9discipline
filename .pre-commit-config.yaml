@@ -12,17 +12,18 @@ repos:
   - hooks:
       - id: black
         language_version: python3
+        args:
+          - --line-length=80
     repo: https://github.com/psf/black
     rev: 20.8b1
   # DOCFORMATTER
   - hooks:
-      - args:
+      - id: docformatter
+        args:
           - -i
           - -r
           - --pre-summary-newline
           - --make-summary-multi-line
-        id: docformatter
-        language_version: python3
     repo: https://github.com/myint/docformatter
     rev: ''
   # MYPY
@@ -32,11 +33,13 @@ repos:
           - tokenize-rt
         args:
           - --config-file=mypy.ini
-        files: app
     rev: ''
     repo: https://github.com/pre-commit/mirrors-mypy
   # ISORT
   - hooks:
       - id: isort
+        args:
+          - --profile=black
+          - --line-length=80
     repo: https://github.com/pycqa/isort
     rev: ''
