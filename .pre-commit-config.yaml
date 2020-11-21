@@ -33,6 +33,7 @@ repos:
           - tokenize-rt
         args:
           - --config-file=mypy.ini
+        exclude: tests
     rev: ''
     repo: https://github.com/pre-commit/mirrors-mypy
   # ISORT
@@ -43,3 +44,29 @@ repos:
           - --line-length=80
     repo: https://github.com/pycqa/isort
     rev: ''
+  # LOCAL HOOKS
+  - repo: local
+    hooks:
+      # pytest
+      - id: pytest
+        name: pytest
+        language: system
+        entry: /usr/bin/pytest
+        args:
+          - tests
+        pass_filenames: false
+        types:
+          - python
+      # version bump
+      - id: autoversion
+        name: autoversion
+        entry: /usr/bin/bash
+        language: system
+        args:
+          - -c
+          - >
+            sed -ri -e "s/(__version__ = .[0-9]+\.[0-9]+\.)[0-9]+/\1$(date +%Y%m%d%H%M%S)/g" setup.py
+            && git add setup.py
+        pass_filenames: false
+        types:
+          - python
