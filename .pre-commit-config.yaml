@@ -1,0 +1,42 @@
+repos:
+  # AUTOFLAKE
+  - hooks:
+      - id: autoflake
+        args:
+          - --in-place
+          - --remove-unused-variables
+          - --remove-all-unused-imports
+    repo: https://github.com/myint/autoflake
+    rev: ''
+  # BLACK-   id: autoflake
+  - hooks:
+      - id: black
+        language_version: python3
+    repo: https://github.com/psf/black
+    rev: 20.8b1
+  # DOCFORMATTER
+  - hooks:
+      - args:
+          - -i
+          - -r
+          - --pre-summary-newline
+          - --make-summary-multi-line
+        id: docformatter
+        language_version: python3
+    repo: https://github.com/myint/docformatter
+    rev: ''
+  # MYPY
+  - hooks:
+      - id: mypy
+        additional_dependencies:
+          - tokenize-rt
+        args:
+          - --config-file=mypy.ini
+        files: app
+    rev: ''
+    repo: https://github.com/pre-commit/mirrors-mypy
+  # ISORT
+  - hooks:
+      - id: isort
+    repo: https://github.com/pycqa/isort
+    rev: ''
