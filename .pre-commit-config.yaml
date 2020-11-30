@@ -26,16 +26,6 @@ repos:
           - --make-summary-multi-line
     repo: https://github.com/myint/docformatter
     rev: ''
-  # MYPY
-  - hooks:
-      - id: mypy
-        additional_dependencies:
-          - tokenize-rt
-        args:
-          - --config-file=mypy.ini
-        exclude: tests
-    rev: ''
-    repo: https://github.com/pre-commit/mirrors-mypy
   # ISORT
   - hooks:
       - id: isort
@@ -47,6 +37,16 @@ repos:
   # LOCAL HOOKS
   - repo: local
     hooks:
+      - id: mypy
+        name: mypy
+        language: system
+        entry: .venv/bin/mypy
+        args:
+          - --config-file=mypy.ini
+        exclude: tests
+        types:
+          - python
+        files: src
       # pytest
       - id: pytest
         name: pytest
