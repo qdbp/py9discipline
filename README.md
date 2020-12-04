@@ -7,8 +7,6 @@ wget https://github.com/qdbp/py9discipline/archive/master.zip \
     && rm master.zip \
     && pre-commit install --install-hooks \
     && touch requirements.txt \
-    && sed -i '/requirements-dev.txt/d' requirements.txt \
-    && echo '-r requirements-dev.txt' >> requirements.txt \
 ;
 ```
 
